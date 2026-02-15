@@ -1,0 +1,480 @@
+<html>
+  <head>
+    <base href="https://web.903299.xyz/" />
+    <meta charset="UTF-8" />
+    <title>网飞电影导航</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+    />
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+          sans-serif;
+        background: #141414;
+        color: #fff;
+        line-height: 1.4;
+        min-height: 100vh;
+      }
+
+      .header {
+        padding: 16px 4%;
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        z-index: 999;
+        background: linear-gradient(
+          180deg,
+          rgba(20, 20, 20, 0.95) 0%,
+          rgba(20, 20, 20, 0.75) 50%,
+          rgba(20, 20, 20, 0) 100%
+        );
+        backdrop-filter: blur(20px);
+        -webkit-backdrop-filter: blur(20px);
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+        transition: all 0.3s ease;
+      }
+
+      .logo-container {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+      }
+
+      .logo {
+        width: 32px;
+        height: 32px;
+        fill: #e50914;
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      }
+
+      .site-name {
+        color: #fff;
+        font-size: 1.4rem;
+        font-weight: 600;
+        letter-spacing: 0.5px;
+        text-transform: uppercase;
+      }
+
+      .logo:hover {
+        transform: scale(1.1);
+      }
+
+      .main-content {
+        padding: 100px 4% 60px;
+        min-height: 100vh;
+        background: linear-gradient(
+          180deg,
+          #141414 0%,
+          #181818 50%,
+          #141414 100%
+        );
+      }
+
+      .section-title {
+        font-size: 2rem;
+        margin: 0 0 40px;
+        font-weight: 700;
+        color: #fff;
+      }
+
+      .sites-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+        gap: 24px;
+        margin-top: 20px;
+      }
+
+      .site-card {
+        background: #181818;
+        border-radius: 4px;
+        overflow: hidden;
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        cursor: pointer;
+        padding: 24px;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        position: relative;
+      }
+
+      .site-card:hover {
+        transform: scale(1.03);
+        background: #232323;
+      }
+
+      .site-title {
+        font-size: 1.3rem;
+        margin-bottom: 12px;
+        color: #fff;
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        font-weight: 600;
+      }
+
+      .site-icon {
+        width: 28px;
+        height: 28px;
+        color: #e50914;
+        transition: all 0.3s ease;
+      }
+
+      .site-card:hover .site-icon {
+        transform: scale(1.1);
+      }
+
+      .site-desc {
+        font-size: 0.95rem;
+        color: #999;
+        line-height: 1.6;
+        margin-bottom: 16px;
+      }
+
+      .site-tags {
+        display: flex;
+        gap: 8px;
+        margin-top: 12px;
+        flex-wrap: wrap;
+      }
+
+      .tag {
+        background: rgba(229, 9, 20, 0.1);
+        color: #e50914;
+        padding: 6px 12px;
+        border-radius: 2px;
+        font-size: 0.85rem;
+        font-weight: 500;
+        letter-spacing: 0.3px;
+        transition: all 0.2s ease;
+      }
+
+      .site-card:hover .tag {
+        background: rgba(229, 9, 20, 0.15);
+        color: #ff1a1a;
+      }
+
+      @media (max-width: 1200px) {
+        .sites-grid {
+          grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+        }
+      }
+
+      @media (max-width: 768px) {
+        .header {
+          padding: 12px 4%;
+        }
+
+        .logo {
+          width: 28px;
+          height: 28px;
+        }
+
+        .site-name {
+          font-size: 1.2rem;
+        }
+
+        .section-title {
+          font-size: 1.6rem;
+          margin: 0 0 30px;
+        }
+
+        .sites-grid {
+          grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+          gap: 20px;
+        }
+
+        .site-card {
+          padding: 20px;
+        }
+
+        .site-title {
+          font-size: 1.2rem;
+        }
+
+        .site-desc {
+          font-size: 0.9rem;
+        }
+      }
+
+      @media (max-width: 480px) {
+        .sites-grid {
+          grid-template-columns: 1fr;
+          gap: 16px;
+        }
+
+        .site-card {
+          padding: 16px;
+        }
+
+        .site-name {
+          font-size: 1.1rem;
+        }
+
+        .section-title {
+          font-size: 1.4rem;
+          margin: 0 0 24px;
+        }
+      }
+
+      @media (min-width: 2000px) {
+        .sites-grid {
+          grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+        }
+
+        .site-card {
+          padding: 32px;
+        }
+
+        .site-title {
+          font-size: 1.5rem;
+        }
+
+        .site-desc {
+          font-size: 1.1rem;
+        }
+      }
+      /* ICP footer for visibility on dark bg */
+      footer {
+        text-align: center;
+        color: #999;
+        font-size: 0.95rem;
+        padding: 20px 0 8px 0;
+        background: none;
+      }
+      footer a {
+        color: #999;
+        text-decoration: none;
+      }
+      footer a:hover {
+        color: #e50914;
+        text-decoration: underline;
+      }
+      .travel-link {
+        text-decoration: none;
+        color: #55bb8a;
+        display: inline-flex;
+        align-items: center;
+        font-size: 0.95rem;
+        margin-top: 3px;
+      }
+      .travel-link img {
+        margin-right: 4px;
+      }
+    </style>
+  </head>
+  <body>
+    <header class="header">
+      <div class="logo-container">
+        <i class="fa-solid fa-film site-icon"></i>
+        <span class="site-name">Movie Navigator</span>
+      </div>
+    </header>
+
+    <template id="site-card-template">
+      <div class="site-card">
+        <h3 class="site-title">
+          <i class="site-icon"></i>
+          <span class="title-text"></span>
+        </h3>
+        <p class="site-desc"></p>
+        <div class="site-tags"></div>
+      </div>
+    </template>
+
+    <main class="main-content">
+      <h2 class="section-title">热门影视导航</h2>
+      <div class="sites-grid" id="sites-container">
+        <!-- 卡片将通过 JavaScript 动态生成 -->
+      </div>
+    </main>
+
+    <!-- 备案信息开始 -->
+    <footer>
+      <p>
+        Copyright &copy; <span id="current-year"></span> dsblkkk all right reserved
+      </p>
+      <p>
+        <a href="https://icp.gov.moe/?keyword=20250822" target="_blank" style="color:#999;text-decoration:none;">
+          <img style="width:20px;height:20px;margin-bottom:-4px" src="https://moe.one/view/img/ico64.png" alt="萌ICP备"/>
+          萌ICP备20250822号
+        </a>
+      </p>
+      <p>
+        <a class="travel-link" href="https://travel.moe/go.html?travel=on" title="异次元之旅-跃迁-我们一起去萌站成员的星球旅行吧！" target="_blank">
+          <img src="https://travel.moe/images/icon/icon64green.png" style="width:24px;height:24px" alt="异次元之旅">异次元之旅
+        </a>
+      </p>
+    </footer>
+    <!-- 备案信息结束 -->
+
+    <script type="application/json" id="sites-data">
+      {
+        "sites": [
+          {
+            "name": "磁力熊",
+            "url": "https://www.cilixiong.com/",
+            "icon": "fa-solid fa-magnet",
+            "description": "提供高清电影、电视剧、动漫资源下载，支持迅雷磁力下载。更新速度快，资源丰富。",
+            "tags": ["磁力下载", "高清资源", "更新快"]
+          },
+          {
+            "name": "火车太堵",
+            "url": "https://tdgo.shop/",
+            "icon": "fa-solid fa-train",
+            "description": "提供高清电影、电视剧、动漫资源，更新速度快。",
+            "tags": ["高清资源", "更新快"]
+          },
+          {
+            "name": "低端影视",
+            "url": "https://ddys.la/",
+            "icon": "fa-solid fa-video",
+            "description": "在线观看影视剧，画质优良，更新及时。",
+            "tags": ["在线观看", "无广告"]
+          },
+          {
+            "name": "555电影",
+            "url": "https://www.5iltmgi.shop/index/home.html",
+            "icon": "fa-solid fa-play",
+            "description": "提供最新影视资源，支持在线观看。",
+            "tags": ["在线播放", "更新快"]
+          },
+          {
+            "name": "桃子影视",
+            "url": "https://www.taozi008.com/index.html",
+            "icon": "fa-solid fa-apple-whole",
+            "description": "丰富的影视资源库，支持在线观看。",
+            "tags": ["免费观看", "资源多"]
+          },
+          {
+            "name": "飘零影院",
+            "url": "https://www.tzqjdy.com/",
+            "icon": "fa-solid fa-film",
+            "description": "提供海量影视资源，支持在线播放。",
+            "tags": ["在线播放", "高清"]
+          },
+          {
+            "name": "硬核指南",
+            "url": "https://yinghezhinan.com/",
+            "icon": "fa-solid fa-tv",
+            "description": "专注于美剧资源，更新及时。",
+            "tags": ["美剧资源", "更新快"]
+          },
+          {
+            "name": "注视影视",
+            "url": "https://gaze.run/",
+            "icon": "fa-solid fa-play",
+            "description": "提供最新电影电视剧在线观看。",
+            "tags": ["在线播放", "资源全"]
+          },
+          {
+            "name": "hdmoli",
+            "url": "https://www.hdmoli.pro/",
+            "icon": "fa-solid fa-magnifying-glass",
+            "description": "影视搜索引擎，帮您找到想看的影视资源。",
+            "tags": ["搜索引擎", "资源聚合"]
+          },
+          {
+            "name": "厂长资源",
+            "url": "https://www.czzy77.com/",
+            "icon": "fa-solid fa-magnifying-glass",
+            "description": "影视搜索引擎，帮您找到想看的影视资源。",
+            "tags": ["搜索引擎", "资源聚合"]
+          },
+          {
+            "name": "NO视频",
+            "url": "https://www.novipnoad.net/",
+            "icon": "fa-solid fa-play",
+            "description": "海量影视资源在线观看，更新及时。",
+            "tags": ["在线播放", "更新快"]
+          },
+          {
+            "name": "libvio",
+            "url": "https://www.libvio.link/",
+            "icon": "fa-solid fa-play",
+            "description": "海量影视资源在线观看，更新及时。",
+            "tags": ["在线播放", "更新快"]
+          },
+          {
+            "name": "修罗影视",
+            "url": "https://www.xlys01.com/",
+            "icon": "fa-solid fa-play",
+            "description": "海量影视资源在线观看，更新及时。",
+            "tags": ["在线播放", "更新快"]
+          },
+          {
+            "name": "独播库",
+            "url": "https://duboku.info/",
+            "icon": "fa-solid fa-tv",
+            "description": "海量影视资源在线观看，更新及时。",
+            "tags": ["在线播放", "更新快"]
+          },
+          {
+            "name": "爱壹帆",
+            "url": "https://www.iyf.tv/",
+            "icon": "fa-solid fa-play-circle",
+            "description": "海量高清视频免费在线观看，提供最新电影、电视剧、综艺和动漫资源。",
+            "tags": ["免费观看", "高清视频", "更新快"]
+          }
+        ]
+      }
+    </script>
+
+    <script>
+      window.addEventListener("scroll", () => {
+        const header = document.querySelector(".header");
+        if (window.scrollY > 50) {
+          header.style.background = "#141414";
+        } else {
+          header.style.background =
+            "linear-gradient(180deg, rgba(20, 20, 20, 0.95) 0%, rgba(20, 20, 20, 0.75) 50%, rgba(20, 20, 20, 0) 100%)";
+        }
+      });
+
+      document.addEventListener("DOMContentLoaded", () => {
+        const template = document.getElementById("site-card-template");
+        const container = document.getElementById("sites-container");
+        const sitesData = JSON.parse(
+          document.getElementById("sites-data").textContent
+        );
+
+        sitesData.sites.forEach((site) => {
+          const card = template.content.cloneNode(true);
+
+          // 设置点击事件
+          card.querySelector(".site-card").onclick = () =>
+            window.open(site.url);
+
+          // 设置图标和标题
+          const icon = card.querySelector(".site-icon");
+          icon.className = `${site.icon} site-icon`;
+          card.querySelector(".title-text").textContent = site.name;
+
+          // 设置描述
+          card.querySelector(".site-desc").textContent = site.description;
+
+          // 设置标签
+          const tagsContainer = card.querySelector(".site-tags");
+          site.tags.forEach((tag) => {
+            const span = document.createElement("span");
+            span.className = "tag";
+            span.textContent = tag;
+            tagsContainer.appendChild(span);
+          });
+
+          container.appendChild(card);
+        });
+
+        // 设置动态备案年份
+        document.getElementById('current-year').textContent = new Date().getFullYear();
+      });
+    </script>
+  </body>
+</html>
