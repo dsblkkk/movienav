@@ -1,4 +1,4 @@
-# Movie Navigator
+# 视界导航
 
 一个 Netflix 风格的影视导航网站，纯静态实现，可轻松部署到 Cloudflare Pages 或 GitHub Pages。
 
